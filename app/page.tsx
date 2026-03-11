@@ -1,10 +1,66 @@
-import { Bot, Phone, Zap, CheckCircle, ArrowRight, Star } from "lucide-react";
+import { Bot, Phone, Zap, CheckCircle, ArrowRight, Star, ChevronDown, Building2, Wrench, Home } from "lucide-react";
+
+const faqs = [
+  {
+    q: "How long does setup actually take?",
+    a: "Most clients are live within 72 hours. We handle all the configuration — you just answer a few questions about your business and we take it from there.",
+  },
+  {
+    q: "Do I need any technical knowledge?",
+    a: "Zero. You don't touch any code, APIs, or settings. We build it, configure it, and hand it to you ready to go.",
+  },
+  {
+    q: "What if I want changes after launch?",
+    a: "Monthly subscribers get free updates — just email us. One-time automation builds include one revision round within 30 days.",
+  },
+  {
+    q: "Will the voice agent actually sound natural?",
+    a: "Yes. We use the same voice AI technology that powers enterprise phone systems. Most callers can't tell the difference.",
+  },
+  {
+    q: "Is $99/month really worth it for a small business?",
+    a: "One missed call that would have been a new customer pays for the month. The voice agent answers every call, 24/7, including after hours when most leads go to voicemail.",
+  },
+  {
+    q: "What kinds of businesses do you work with?",
+    a: "Service businesses: HVAC, plumbing, real estate, dental, law firms, salons, contractors, restaurants. If you get phone calls or website visitors, we can help.",
+  },
+];
+
+const caseStudies = [
+  {
+    icon: Home,
+    industry: "Real Estate",
+    company: "Torres Homes",
+    service: "AI Chatbot",
+    result: "Captures leads 24/7 — name, contact, and property preferences — even when the agent is with a client.",
+    metric: "Never misses a lead",
+  },
+  {
+    icon: Wrench,
+    industry: "HVAC",
+    company: "Arctic Air",
+    service: "Voice AI Receptionist",
+    result: "Answers every inbound call, books service appointments, and handles FAQs without a human picking up.",
+    metric: "0 missed calls",
+  },
+  {
+    icon: Building2,
+    industry: "Home Services",
+    company: "Local Contractor",
+    service: "AI Workflow Automation",
+    result: "Automated lead follow-up via email + SMS the moment a form is submitted. No more forgetting to follow up.",
+    metric: "Follow-up in < 60 sec",
+  },
+];
+
+const industries = ["HVAC & Plumbing", "Real Estate", "Dental & Medical", "Law Firms", "Restaurants", "Salons & Spas", "Contractors", "Auto Shops"];
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
       {/* Nav */}
-      <nav className="border-b border-zinc-800 px-6 py-4">
+      <nav className="border-b border-zinc-800 px-6 py-4 sticky top-0 bg-zinc-950/95 backdrop-blur z-10">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-violet-500 flex items-center justify-center">
@@ -12,9 +68,13 @@ export default function Home() {
             </div>
             <span className="font-bold text-lg tracking-tight">AutoStacked</span>
           </div>
-          <a href="mailto:hello@autostacked.com" className="text-sm text-zinc-400 hover:text-white transition-colors">
-            hello@autostacked.com
-          </a>
+          <div className="flex items-center gap-6">
+            <a href="#case-studies" className="text-sm text-zinc-400 hover:text-white transition-colors hidden sm:block">Results</a>
+            <a href="#services" className="text-sm text-zinc-400 hover:text-white transition-colors hidden sm:block">Pricing</a>
+            <a href="mailto:hello@autostacked.com" className="bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+              Get started
+            </a>
+          </div>
         </div>
       </nav>
 
@@ -23,18 +83,18 @@ export default function Home() {
         <div className="max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-violet-500/10 border border-violet-500/20 rounded-full px-4 py-1.5 text-violet-400 text-sm mb-8">
             <Star size={12} />
-            AI-powered tools for small businesses
+            AI tools built for small businesses
           </div>
           <h1 className="text-5xl sm:text-6xl font-black tracking-tight mb-6 leading-tight">
             Your business,<br />
             <span className="text-violet-400">always on.</span>
           </h1>
           <p className="text-xl text-zinc-400 mb-10 max-w-xl mx-auto">
-            We build AI voice agents, chatbots, and automations that work while you sleep. Setup in days, not months.
+            We build AI voice agents, chatbots, and automations for local businesses. Live in 72 hours. No technical setup on your end.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="#services" className="bg-violet-600 hover:bg-violet-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2">
-              See what we build <ArrowRight size={16} />
+              See pricing <ArrowRight size={16} />
             </a>
             <a href="mailto:hello@autostacked.com" className="border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition-colors">
               Talk to us
@@ -43,8 +103,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Industries */}
+      <section className="px-6 pb-16 border-b border-zinc-800">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-center text-zinc-500 text-sm mb-6">Built for local service businesses</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {industries.map(i => (
+              <span key={i} className="bg-zinc-900 border border-zinc-800 text-zinc-400 text-sm px-4 py-2 rounded-full">{i}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section id="case-studies" className="px-6 py-20 border-b border-zinc-800">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-4">Real businesses. Real results.</h2>
+            <p className="text-zinc-400 text-lg">Here&apos;s what we&apos;ve built for clients like you.</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {caseStudies.map(cs => (
+              <div key={cs.company} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-violet-500/30 transition-colors">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-9 h-9 rounded-lg bg-violet-500/10 flex items-center justify-center shrink-0">
+                    <cs.icon size={16} className="text-violet-400" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-zinc-500">{cs.industry}</div>
+                    <div className="font-bold text-sm">{cs.company}</div>
+                  </div>
+                </div>
+                <div className="inline-block bg-violet-500/10 text-violet-400 text-xs font-semibold px-2.5 py-1 rounded-full mb-4">{cs.service}</div>
+                <p className="text-zinc-400 text-sm mb-5 leading-relaxed">{cs.result}</p>
+                <div className="border-t border-zinc-800 pt-4">
+                  <div className="text-white font-bold text-sm flex items-center gap-2">
+                    <CheckCircle size={14} className="text-violet-400 shrink-0" />
+                    {cs.metric}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Services */}
-      <section id="services" className="px-6 py-20 border-t border-zinc-800">
+      <section id="services" className="px-6 py-20 border-b border-zinc-800">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-4">Three tools. One agency.</h2>
@@ -122,7 +227,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Bundle */}
           <div className="mt-8 bg-gradient-to-r from-violet-900/40 to-zinc-900 border border-violet-500/30 rounded-2xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <div className="text-violet-400 text-sm font-semibold mb-1">Full AI Stack Bundle</div>
@@ -141,7 +245,7 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="px-6 py-20 border-t border-zinc-800">
+      <section className="px-6 py-20 border-b border-zinc-800">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-black tracking-tight mb-4">Live in 72 hours</h2>
           <p className="text-zinc-400 mb-12">No long onboarding. No technical setup on your end.</p>
@@ -161,14 +265,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="px-6 py-20 border-t border-zinc-800">
+      {/* FAQ */}
+      <section className="px-6 py-20 border-b border-zinc-800">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-3xl font-black tracking-tight mb-10 text-center">Common questions</h2>
+          <div className="space-y-3">
+            {faqs.map(({ q, a }) => (
+              <details key={q} className="group bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between px-6 py-4 cursor-pointer list-none hover:bg-zinc-800/50 transition-colors">
+                  <span className="font-semibold text-sm pr-4">{q}</span>
+                  <ChevronDown size={16} className="text-zinc-500 shrink-0 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-6 pb-5 text-zinc-400 text-sm leading-relaxed">{a}</div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section id="contact" className="px-6 py-24">
         <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-3xl font-black tracking-tight mb-4">Ready to automate?</h2>
-          <p className="text-zinc-400 mb-8">Send us a message and we&apos;ll get back to you within a few hours.</p>
+          <h2 className="text-4xl font-black tracking-tight mb-4">Ready to automate?</h2>
+          <p className="text-zinc-400 mb-8 text-lg">Send us a message and we&apos;ll get back to you within a few hours. No sales pitch — just a quick conversation about what you need.</p>
           <a href="mailto:hello@autostacked.com" className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-bold px-10 py-4 rounded-xl text-lg transition-colors">
             hello@autostacked.com <ArrowRight size={18} />
           </a>
+          <p className="text-zinc-600 text-sm mt-4">Or text us — we&apos;re fast.</p>
         </div>
       </section>
 
